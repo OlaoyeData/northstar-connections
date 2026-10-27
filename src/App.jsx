@@ -684,32 +684,11 @@ const PLANS = [
     cta: "Upgrade to Plus",
     style: "outline",
   },
-  {
-    key: "concierge",
-    name: "NorthStar Concierge",
-    price: "$1,500",
-    period: "– $5,000",
-    note: "Bespoke service, tailored entirely to you.",
-    features: [
-      "Personal, in-depth interview",
-      "Detailed compatibility assessment",
-      "Highly curated, vetted introductions",
-    ],
-    cta: "Inquire Now",
-    style: "featured",
-  },
 ];
 
 function PlanCard({ plan, onApply }) {
-  const featured = plan.style === "featured";
   return (
-    <div
-      className={`flex flex-col rounded-sm border p-6 sm:p-8 ${
-        featured
-          ? "border-[#E8C468] bg-[#0E1A38] shadow-[0_0_0_1px_rgba(232,196,104,0.15)]"
-          : "border-white/10 bg-[#0E1A38]"
-      }`}
-    >
+    <div className="flex flex-col rounded-sm border border-white/10 bg-[#0E1A38] p-6 sm:p-8">
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-serif text-xl text-white">{plan.name}</h3>
         {plan.badge && (
@@ -717,14 +696,12 @@ function PlanCard({ plan, onApply }) {
             {plan.badge}
           </span>
         )}
-        {featured && <Crown className="h-5 w-5 shrink-0 text-[#E8C468]" />}
       </div>
 
       <div className="mt-5 flex flex-wrap items-baseline gap-1">
         <span className="font-serif text-4xl text-white">{plan.price}</span>
         <span className="text-sm text-white/50">{plan.period}</span>
       </div>
-      {plan.note && <p className="mt-1 text-xs italic text-white/40">{plan.note}</p>}
 
       <ul className="mt-7 flex-1 space-y-3.5 border-t border-white/10 pt-7">
         {plan.features.map((f) => (
@@ -737,14 +714,9 @@ function PlanCard({ plan, onApply }) {
 
       <button
         onClick={onApply}
-        className={`mt-8 rounded-sm px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8C468] ${
-          featured
-            ? "bg-gradient-to-b from-[#E8C468] to-[#C9A227] text-[#1B1400] flex items-center justify-center gap-2"
-            : "border border-white/25 text-white hover:bg-white/5"
-        }`}
+        className="mt-8 rounded-sm border border-white/25 px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-white transition-transform hover:scale-[1.02] hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8C468]"
       >
         {plan.cta}
-        {featured && <ArrowRight className="h-4 w-4" />}
       </button>
     </div>
   );
@@ -764,7 +736,7 @@ function MembershipPage({ setPage }) {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-16 grid max-w-6xl gap-6 sm:grid-cols-2">
+      <div className="relative mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
         {PLANS.map((p) => (
           <PlanCard key={p.key} plan={p} onApply={() => setPage("apply")} />
         ))}
